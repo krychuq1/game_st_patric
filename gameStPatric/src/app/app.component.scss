@@ -1,7 +1,20 @@
+.game{
+
+}
 #ball{
   height: 40px;
   width: 40px;
   background: red;
   border-radius: 100%;
   margin-left: 5px;
+
+}
+#character{
+  position: absolute;
+  height: 100px;
+}
+.beer{
+  position: absolute;
+  bottom: 0;
+  height: 25px;
 }
