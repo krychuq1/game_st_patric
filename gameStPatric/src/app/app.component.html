@@ -1,14 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
+
 <div class="game">
-<!--{{test}}-->
-  Score: {{score}} {{accelerationX}}
-  <!--<p *ngIf="all">{{all.dm.x }} x {{all.dm.y}} y {{all.dm.z}} z</p>-->
-  <!--<p *ngIf="all">{{all.dm.gx }} x {{all.dm.gy}} y {{all.dm.gz}} z</p>-->
-  <!--<p *ngIf="position">{{position}}</p>-->
-  <!--<p *ngIf="currentPosition">{{currentPosition}} here here</p>-->
- <!--<div class="road"></div>-->
+  <div class="points">
+    <span>alcohol: {{score | number : '0.0-3'}}&#8240;</span>
+    <span>Health: {{health | number : '1.0-0'}}%</span>
+  </div>
   <div id="gameHolder">
+    <div id="road">
+      <!--<img src="../assets/star_blink.gif">-->
+      <img src="../assets/rainbow.svg">
+    </div>
     <img src="../assets/character.gif" id="character">
   </div>
-
 </div>

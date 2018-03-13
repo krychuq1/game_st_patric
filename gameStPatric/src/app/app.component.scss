@@ -1,5 +1,26 @@
-.game{
 
+.game{
+  height: 100vh;
+  overflow: hidden;
+  .points{
+    display: flex;
+    justify-content: space-between;
+  }
+  #gameHolder{
+    height: 100%;
+    overflow: hidden;
+    //background: lightblue;
+    background: linear-gradient(to bottom, rgba(25,39,92,1) 0%, rgba(2,1,16,1) 63%, rgba(2,1,16,1) 100%);
+    #road{
+      height: 100%;
+      //width: 400px;
+      //background-image: url("../assets/rainbow.svg");
+      //border: 1px solid white;
+      margin: 0 auto;
+      //background-repeat:no-repeat;
+      //background-size:cover;
+    }
+  }
 }
 #ball{
   height: 40px;
@@ -12,9 +33,10 @@
 #character{
   position: absolute;
   height: 100px;
+  bottom: 0px;
 }
 .beer{
   position: absolute;
   bottom: 0;
-  height: 25px;
+  height: 20px;
 }
