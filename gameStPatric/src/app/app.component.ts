@@ -69,16 +69,16 @@ export class AppComponent implements AfterViewInit{
       if(this.isRunning){
         this.checkOnRoad();
         //for all beers
-        // this.beers.forEach((beer)=>{
-        //   beer.positionY = beer.positionY + beer.speed;
-        //   beer.img.style.bottom = beer.positionY + 'px';
-        //   this.checkIfBeerTouched(beer);
-        //   //check if beer reached max height
-        //   if(beer.positionY > this.maxHeight + 80){
-        //     //set random y again
-        //     this.randomizeExistingBeer(beer);
-        //   }
-        // });
+        this.beers.forEach((beer)=>{
+          beer.positionY = beer.positionY + beer.speed;
+          beer.img.style.bottom = beer.positionY + 'px';
+          this.checkIfBeerTouched(beer);
+          //check if beer reached max height
+          if(beer.positionY > this.maxHeight + 80){
+            //set random y again
+            this.randomizeExistingBeer(beer);
+          }
+        });
       }
       this.test++;
     });
