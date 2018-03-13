@@ -5,6 +5,7 @@ import {BeerModel} from "../modals/beer";
 import {GameOverDialog} from "./pop-ups/game-over/game-over.component";
 import {MatDialog} from "@angular/material";
 import {tick} from "@angular/core/testing";
+import {CloudModel} from "../modals/cloud";
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements AfterViewInit{
   test = 0;
   beer;
   beers: BeerModel[] = [];
+  cloud: CloudModel[] = [];
   gameHolder;
   score = 0;
   road: HTMLElement;
@@ -49,6 +51,7 @@ export class AppComponent implements AfterViewInit{
 
     this.setRoad();
     this.generateBeers(6);
+    this.generateCloud(4);
     this.startGame();
   }
 
@@ -66,16 +69,16 @@ export class AppComponent implements AfterViewInit{
       if(this.isRunning){
         this.checkOnRoad();
         //for all beers
-        this.beers.forEach((beer)=>{
-          beer.positionY = beer.positionY + beer.speed;
-          beer.img.style.bottom = beer.positionY + 'px';
-          this.checkIfBeerTouched(beer);
-          //check if beer reached max height
-          if(beer.positionY > this.maxHeight + 80){
-            //set random y again
-            this.randomizeExistingBeer(beer);
-          }
-        });
+        // this.beers.forEach((beer)=>{
+        //   beer.positionY = beer.positionY + beer.speed;
+        //   beer.img.style.bottom = beer.positionY + 'px';
+        //   this.checkIfBeerTouched(beer);
+        //   //check if beer reached max height
+        //   if(beer.positionY > this.maxHeight + 80){
+        //     //set random y again
+        //     this.randomizeExistingBeer(beer);
+        //   }
+        // });
       }
       this.test++;
     });
@@ -128,6 +131,28 @@ export class AppComponent implements AfterViewInit{
         this.beers.push(new BeerModel(positionX, positionY, speed, id, beerImg));
         this.gameHolder.appendChild(beerImg);
       }
+  }
+  generateCloud(quantity){
+    for(let i = 0; i<quantity; i++){
+      // let positionX = this.roadStart + 100;
+
+      let positionY = this.getRandomInt(100, this.maxHeight);
+      let id = 'cloud' + i;
+      let speed = this.getRandomInt(1, 8);
+      // let speed = 10;
+
+      let cloudImg = document.createElement('img');
+      let url = '../assets/cloud'+ i + '.png';
+      cloudImg.setAttribute('src', url);
+      cloudImg.setAttribute('id', id);
+      cloudImg.setAttribute('class', 'cloud');
+      cloudImg.style.left = '0px';
+      cloudImg.style.width = '90px';
+      cloudImg.style.position = 'absolute';
+      cloudImg.style.bottom = positionY +'px';
+      this.cloud.push(new CloudModel(positionY, speed, id, cloudImg));
+      this.gameHolder.appendChild(cloudImg);
+    }
   }
   randomizeExistingBeer(beer){
     beer.positionY = this.getRandomInt(-150, -50);
