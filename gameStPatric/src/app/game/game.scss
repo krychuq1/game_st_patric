@@ -1,3 +1,57 @@
+@import '../../loader';
+
+.intro-holder{
+  background-color: #000022;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .intro{
+    height: 430px;
+    h3{
+      color: white;
+      margin: 0;
+      line-height: 1.6;
+    }
+    img{
+      margin: 20px 0;
+      height: 140px;
+    }
+    button{
+      margin-top: 30px;
+    }
+  }
+  .footer{
+    position: absolute;
+    color: #b7b7b7;
+    bottom: 20px;
+    font-size: 0.6rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  .speaker{
+    position: absolute;
+    top: 20px;
+    left:  20px;
+    height: 20px;
+  }
+  .guy{
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    height: 100px;
+    &.guy1{
+      top: 60px;
+      left: 0;
+    }
+
+  }
+
+
+}
+
+
+
 
 .game{
   height: 100vh;
@@ -5,6 +59,22 @@
   .points{
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    width: calc(100% - 40px);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    padding: 20px 20px 0 20px;
+    align-items: center;
+    .score{
+      background: #ff005a;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    #heart{
+      height: 40px;
+    }
+
   }
   #gameHolder{
     height: 100%;

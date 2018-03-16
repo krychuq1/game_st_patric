@@ -7,3 +7,18 @@ body{
   height: 100vh;
   overflow: hidden;
 }
+
+h3{
+  font-family: 'Lobster', cursive;
+}
+button{
+  background: #ff005a;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  /*color: #ff005a;*/
+  font-family: 'Lobster', cursive;
+
+}

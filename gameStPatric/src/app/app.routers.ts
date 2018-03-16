@@ -4,7 +4,6 @@ import {GameComponent} from "./game/game.component";
 
 
 export const routes: Route[] = [
-    { path: '', component: IntroComponent,  pathMatch: 'full'  },
-   { path: 'game', component: GameComponent,  pathMatch: 'full'  }
+    { path: '', component: GameComponent,  pathMatch: 'full' }
 
 ];

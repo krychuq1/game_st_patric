@@ -24,12 +24,14 @@ export class GameComponent implements AfterViewInit{
   gameHolder;
   score = 0;
   road: HTMLElement;
+  heart;
   roadStart: number;
   roadEnd: number;
   health: number;
   tick;
   isRunning: boolean;
   isPhoneMoving: boolean;
+  isReady: boolean;
   ngAfterViewInit(): void {
     window.ondevicemotion = (event) =>{
       this.position = -1 * (event.accelerationIncludingGravity.x);
@@ -40,6 +42,7 @@ export class GameComponent implements AfterViewInit{
     };
     //get character
     this.character = document.getElementById('character');
+    this.heart = document.getElementById('heart');
     //set starting margin
     this.character.style.marginLeft = '100px';
     //set starting y postion
@@ -51,7 +54,7 @@ export class GameComponent implements AfterViewInit{
     this.setRoad();
     this.generateBeers(6);
     this.generateCloud(4);
-    this.startGame();
+    // this.startGame();
   }
 
   constructor(public dialog: MatDialog){
@@ -61,12 +64,14 @@ export class GameComponent implements AfterViewInit{
     this.currentPosition = 100;
     //init health
     this.health = 100;
-    this.isRunning = true;
+    this.isReady = false;
   }
   startGame(){
+    this.isRunning = true;
     this.tick = Observable.interval(42).subscribe(x => {
       if(this.isRunning){
         this.checkOnRoad();
+        this.animateHeart();
         this.animateBeers();
         this.animateClouds();
         this.addAutoDrunkMove();
@@ -224,5 +229,47 @@ export class GameComponent implements AfterViewInit{
       minWidth: '300px',
     });
   }
+  animateHeart(){
+    if(this.health<= 0){
+      this.heart.src = "assets/heart/11.png";
+    }
+    if(this.health > 0 && this.health <= 5){
+      this.heart.src = "assets/heart/10.png";
+    }
+    if(this.health > 5 && this.health <= 10){
+      this.heart.src = "assets/heart/9.png";
+    }
+    if(this.health > 10 && this.health <= 20){
+      this.heart.src = "assets/heart/8.png";
+    }
+    if(this.health > 20 && this.health <= 30){
+      this.heart.src = "assets/heart/7.png";
+    }
+    if(this.health > 30 && this.health <= 40){
+      this.heart.src = "assets/heart/6.png";
+    }
+    if(this.health > 40 && this.health <= 50){
+      this.heart.src = "assets/heart/5.png";
+    }
+    if(this.health > 50 && this.health <= 60){
+      this.heart.src = "assets/heart/4.png";
+    }
+    if(this.health > 60 && this.health <= 70){
+      this.heart.src = "assets/heart/3.png";
+    }
+    if(this.health > 70 && this.health <= 80){
+      this.heart.src = "assets/heart/2.png";
+    }
+    if(this.health > 80 && this.health <= 90){
+      this.heart.src = "assets/heart/1.png";
+    }
+    if(this.health > 90 && this.health <= 100){
+      this.heart.src = "assets/heart/0.png";
+    }
+  }
+  setIsReady(){
+    this.isReady = true;
+    console.log('here')
 
+  }
 }

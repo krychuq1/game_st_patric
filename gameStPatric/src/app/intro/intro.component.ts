@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {AfterViewChecked, AfterViewInit, ApplicationRef, ChangeDetectorRef, Component, NgZone} from '@angular/core';
+import {isRejected} from "q";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   templateUrl: './intro.html',
@@ -6,7 +8,18 @@ import { Component } from '@angular/core';
 })
 export class IntroComponent {
 
-  constructor() {
+
+  isReady: boolean;
+
+
+  constructor( ) {
+    this.isReady = false;
+    // this.http.get('../../assets.')
+  }
+  setIsReady(){
+    this.isReady = true;
+    console.log('here')
+
   }
 }
 
