@@ -1,94 +1,94 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<!--<div class="intro-holder" *ngIf="!isRunning && !isGameOver">-->
-  <!--<div class="loader-holder" *ngIf="!isReady">-->
-    <!--<div id="glass">-->
-      <!--<div id="beer"></div>-->
-    <!--</div>-->
-    <!--<div id="poignet"></div>-->
-    <!--<div id="mousse_1"></div>-->
-    <!--<div id="mousse_2"></div>-->
-    <!--<div id="mousse_3"></div>-->
-    <!--<div id="mousse_4"></div>-->
-    <!--<div id="mousse_5"></div>-->
-    <!--<span class="gettingReady">We are getting your beers in order..</span>-->
-  <!--</div>-->
+<div class="intro-holder" *ngIf="!isRunning && !isGameOver">
+  <div class="loader-holder" *ngIf="!isReady">
+    <div id="glass">
+      <div id="beer"></div>
+    </div>
+    <div id="poignet"></div>
+    <div id="mousse_1"></div>
+    <div id="mousse_2"></div>
+    <div id="mousse_3"></div>
+    <div id="mousse_4"></div>
+    <div id="mousse_5"></div>
+    <span class="gettingReady">We are getting your beers in order..</span>
+  </div>
 
-  <!--<div class="intro" [hidden]="!isReady || isRunning">-->
-    <!--<div>-->
-      <!--<h3>It's St. Patrick's Day,</h3>-->
-      <!--<h3>Let's celebrate with some beers!</h3>-->
-      <!--<img src="../../assets/phone_rotate.gif" (load)="setIsReady()">-->
-      <!--<h3>Turn your phone to the left or right </h3>-->
-      <!--<h3>drink some beers on the rainbow!</h3>-->
-      <!--<button (click)="startGame()">play</button>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<img src="../../assets/guy1.png" class="guy guy1">-->
-  <!--<img src="../../assets/guy2.png" class="guy">-->
-  <!--<span class="footer">-->
-    <!--<a href="https://www.sevenamstudio.com">Powered by Sevenamstudio</a>-->
-  <!--</span>-->
-<!--</div>-->
+  <div class="intro" [hidden]="!isReady || isRunning">
+    <div>
+      <h3>It's St. Patrick's Day,</h3>
+      <h3>Let's celebrate with some beers!</h3>
+      <img src="../../assets/phone_rotate.gif" (load)="setIsReady()">
+      <h3>Turn your phone to the left or right </h3>
+      <h3>drink some beers on the rainbow!</h3>
+      <button (click)="startGame()">play</button>
+    </div>
+  </div>
+  <img src="../../assets/guy1.png" class="guy guy1">
+  <img src="../../assets/guy2.png" class="guy">
+  <span class="footer">
+    <a href="https://www.sevenamstudio.com">Powered by Sevenamstudio</a>
+  </span>
+</div>
 
-<!--<div class="game" [hidden]="!isReady || !isRunning  || isGameOver">-->
-  <!--<audio  id="backgroundSong" src="../../assets/songs/background_song.mp3" loop="loop" (load)="setIsReady()"-->
-          <!--&gt;</audio>-->
-  <!--<audio  id="gameOverSong" src="../../assets/songs/game_over.mp3"></audio>-->
-  <!--<div id="gameHolder">-->
-    <!--<div class="points">-->
-      <!--<div class="score-holder">-->
-        <!--<span class="score">{{score | number : '0.2-3'}}&#8240;</span>-->
-        <!--<div class="clover-score">-->
-          <!--<span>{{collectedClovers}} x</span>-->
-          <!--<img src="../../assets/cloverScore.png">-->
+<div class="game" [hidden]="!isReady || !isRunning  || isGameOver">
+  <audio  id="backgroundSong" src="../../assets/songs/background_song.mp3" loop="loop" (load)="setIsReady()"
+          ></audio>
+  <audio  id="gameOverSong" src="../../assets/songs/game_over.mp3"></audio>
+  <div id="gameHolder">
+    <div class="points">
+      <div class="score-holder">
+        <span class="score">{{score | number : '0.2-3'}}&#8240;</span>
+        <div class="clover-score">
+          <span>{{collectedClovers}} x</span>
+          <img src="../../assets/cloverScore.png">
 
-        <!--</div>-->
-        <!--&lt;!&ndash;<h3>koniczynki: {{collectedClovers}} </h3>&ndash;&gt;-->
-      <!--</div>-->
+        </div>
+        <!--<h3>koniczynki: {{collectedClovers}} </h3>-->
+      </div>
 
-      <!--<img src="../../assets/heart/0.png" id="heart">-->
-      <!--<img src="../../assets/heart/1.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/2.png"  style="display: none;">-->
-      <!--<img src="../../assets/heart/3.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/4.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/5.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/6.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/7.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/8.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/9.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/10.png" style="display: none;">-->
-      <!--<img src="../../assets/heart/11.png" style="display: none;">-->
-      <!--<img src="../../assets/cloud0.png" style="display: none;">-->
-      <!--<img src="../../assets/cloud1.png" style="display: none;">-->
-      <!--<img src="../../assets/cloud2.png" style="display: none;">-->
-      <!--<img src="../../assets/cloud3.png" style="display: none;">-->
-      <!--<img src="../../assets/clover.png" style="display: none;">-->
+      <img src="../../assets/heart/0.png" id="heart">
+      <img src="../../assets/heart/1.png" style="display: none;">
+      <img src="../../assets/heart/2.png"  style="display: none;">
+      <img src="../../assets/heart/3.png" style="display: none;">
+      <img src="../../assets/heart/4.png" style="display: none;">
+      <img src="../../assets/heart/5.png" style="display: none;">
+      <img src="../../assets/heart/6.png" style="display: none;">
+      <img src="../../assets/heart/7.png" style="display: none;">
+      <img src="../../assets/heart/8.png" style="display: none;">
+      <img src="../../assets/heart/9.png" style="display: none;">
+      <img src="../../assets/heart/10.png" style="display: none;">
+      <img src="../../assets/heart/11.png" style="display: none;">
+      <img src="../../assets/cloud0.png" style="display: none;">
+      <img src="../../assets/cloud1.png" style="display: none;">
+      <img src="../../assets/cloud2.png" style="display: none;">
+      <img src="../../assets/cloud3.png" style="display: none;">
+      <img src="../../assets/clover.png" style="display: none;">
 
-      <!--&lt;!&ndash;<span>Health: {{health | number : '1.0-0'}}%</span>&ndash;&gt;-->
-    <!--</div>-->
-    <!--<div id="road">-->
-      <!--&lt;!&ndash;<img src="../assets/star_blink.gif">&ndash;&gt;-->
-      <!--&lt;!&ndash;<img src="../assets/cloud.png" class="cloud">&ndash;&gt;-->
-      <!--<img src="../../assets/rainbow.svg">-->
-    <!--</div>-->
-    <!--<img src="../../assets/character.gif" id="character" >-->
-    <!--<img src="../../assets/popup.png" [hidden]="!showPopUp" id="popup">-->
-    <!--<img src="../../assets/tapPopUp.png" [hidden]="!showTapPopUp" id="tapPopUp">-->
+      <!--<span>Health: {{health | number : '1.0-0'}}%</span>-->
+    </div>
+    <div id="road">
+      <!--<img src="../assets/star_blink.gif">-->
+      <!--<img src="../assets/cloud.png" class="cloud">-->
+      <img src="../../assets/rainbow.svg" class="rainbow">
+    </div>
+    <img src="../../assets/character.gif" id="character" >
+    <img src="../../assets/popup.png" [hidden]="!showPopUp" id="popup">
+    <img src="../../assets/tapPopUp.png" [hidden]="!showTapPopUp" id="tapPopUp">
 
-    <!--<img src="../../assets/clover.png" id="clover" (click)="collectClover()">-->
-  <!--</div>-->
-  <!--<img [src]="isMute ? '../../assets/speaker_off.png' : '../../assets/speaker_on.png'"-->
-        <!--class="speaker" (click)="mutePage()">-->
+    <img src="../../assets/clover.png" id="clover" (click)="collectClover()">
+  </div>
+  <img [src]="isMute ? '../../assets/speaker_off.png' : '../../assets/speaker_on.png'"
+        class="speaker" (click)="mutePage()">
 
-<!--</div>-->
+</div>
 
-<!--*ngIf="isGameOver-->
-<div class="gameOver">
+<div class="gameOver" *ngIf="isGameOver">
   <div class="gameOver--inner">
     <h3 class="gameOver--header">Game over! :(</h3>
     <h3 class="small">Thank you for participating in our project!</h3>
     <h3 class="small">Happy ST.PATRICK'S DAY</h3>
     <h3 class="gameOver--score">You have:<span class="pink"> {{score | number : '0.2-3'}}&#8240;</span></h3>
+    <h3 class="gameOver--score">Collected clovers:<span class="green"> {{collectedClovers}}</span></h3>
     <button (click)="startGame()">play again</button>
   </div>
   <span class="footer">

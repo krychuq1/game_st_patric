@@ -61,6 +61,7 @@ export class GameComponent implements AfterViewInit{
     this.gameHolder = document.getElementById('gameHolder');
     this.road = document.getElementById('road');
     this.clover = document.getElementById('clover');
+    this.clover.style.zIndex = '3';
     this.clover.style.bottom = '0px';
 
     console.log(this.clover.style);
@@ -94,7 +95,6 @@ export class GameComponent implements AfterViewInit{
     this.cloverPosition = 0;
     this.collectedClovers = 0;
     this.showTapPopUp = false;
-
   }
   startGame(){
     this.isRunning = true;
@@ -102,10 +102,11 @@ export class GameComponent implements AfterViewInit{
     this.health = 100;
     this.currentPosition = 100;
     this.score = 0;
+    this.collectedClovers = 0;
     this.clearElements();
     this.generateBeers(6);
     this.generateCloud(3);
-
+    this.generateStars(30);
     this.backgroundSong.play();
 
 
@@ -165,9 +166,35 @@ export class GameComponent implements AfterViewInit{
       beerImg.style.position = 'absolute';
       beerImg.style.bottom = positionY +'px';
       beerImg.style.height = '35px';
+      beerImg.style.zIndex = '3';
       beerImg.style.left = positionX + 'px';
       this.beers.push(new BeerModel(positionX, positionY, speed, id, beerImg));
       this.gameHolder.appendChild(beerImg);
+    }
+  }
+  generateStars(quantity){
+    let positionY = 100;
+    let positionX = 0;
+    let temp = Math.round(this.maxWidth / quantity);
+    console.log(temp)
+    for(let i = 0; i<quantity; i++){
+      // let positionX = this.roadStart + 100;
+      let id = 'star' + i;
+      // let speed = 10;
+      let starImg = document.createElement('img');
+      starImg.setAttribute('src', '../assets/star.png');
+      starImg.setAttribute('id', id);
+      starImg.setAttribute('class', 'star');
+      starImg.style.left = '0px';
+      starImg.style.position = 'absolute';
+      starImg.style.bottom = positionY +'px';
+      // beerImg.style.height = '35px';
+      starImg.style.left = positionX + 'px';
+      starImg.style.height = this.getRandomInt(5, 15) + 'px';
+      positionY = this.getRandomInt(100, this.maxHeight);
+      positionX = positionX + 12;
+      // this.beers.push(new BeerModel(positionX, positionY, speed, id, beerImg));
+      this.gameHolder.appendChild(starImg);
     }
   }
   animateBeers(){
@@ -223,6 +250,8 @@ export class GameComponent implements AfterViewInit{
       cloudImg.style.width = '90px';
       cloudImg.style.position = 'absolute';
       cloudImg.style.bottom = positionY +'px';
+      cloudImg.style.zIndex = '3';
+
       this.clouds.push(new CloudModel(positionY, positionX, speed, id, cloudImg));
       this.gameHolder.appendChild(cloudImg);
 
@@ -247,7 +276,7 @@ export class GameComponent implements AfterViewInit{
   clearElements() {
     let children = this.gameHolder.childNodes;
     children.forEach((child)=>{
-      if(child.className === 'cloud' || child.className === 'beer'){
+      if(child.className === 'cloud' || child.className === 'beer' || child.className === 'star'){
         this.gameHolder.removeChild(child);
       }
     });
@@ -290,7 +319,6 @@ export class GameComponent implements AfterViewInit{
   checkOnRoad(){
     if(this.health <= 0){
       this.clearElements();
-      this.collectedClovers = 0;
       if(this.isRunning){
         this.gameOver();
       }
@@ -310,8 +338,6 @@ export class GameComponent implements AfterViewInit{
   }
   gameOver(){
     this.backgroundSong.pause();
-    this.gameOverSong.play();
-    // this.backgroundSong = this.gameOverSong;
     this.isGameOver = true;
 
     // this.isRunning = !this.isRunning;
