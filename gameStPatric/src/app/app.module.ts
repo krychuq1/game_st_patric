@@ -9,6 +9,7 @@ import {routes} from "./app.routers";
 import {RouterModule} from "@angular/router";
 import {IntroComponent} from "./intro/intro.component";
 import {GameComponent} from "./game/game.component";
+import {GameOverComponent} from "./game-over/game-over.component";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {GameComponent} from "./game/game.component";
     AppComponent,
     GameOverDialog,
     IntroComponent,
-    GameComponent
+    GameComponent,
+    GameOverComponent
   ],
   imports: [
     BrowserModule,

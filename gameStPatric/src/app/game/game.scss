@@ -1,5 +1,5 @@
 @import '../../loader';
-
+@import "../game-over/game-over";
 .intro-holder{
   background-color: #000022;
   height: 100%;
@@ -29,12 +29,7 @@
     font-size: 0.6rem;
     font-family: 'Poppins', sans-serif;
   }
-  .speaker{
-    position: absolute;
-    top: 20px;
-    left:  20px;
-    height: 20px;
-  }
+
   .guy{
     position: absolute;
     right: 0;
@@ -56,6 +51,12 @@
 .game{
   height: 100vh;
   overflow: hidden;
+  .speaker{
+    position: absolute;
+    bottom: 20px;
+    left:  20px;
+    height: 20px;
+  }
   .points{
     display: flex;
     justify-content: space-between;
@@ -65,11 +66,27 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     padding: 20px 20px 0 20px;
-    align-items: center;
+    //align-items: center;
+    .score-holder{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .clover-score{
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      padding-left: 5px;
+
+      span{
+        margin-right: 10px;
+      }
+    }
     .score{
       background: #ff005a;
       padding: 3px 10px;
       border-radius: 20px;
+
     }
     #heart{
       height: 40px;
@@ -99,10 +116,28 @@
   margin-left: 5px;
 
 }
+#clover{
+  position: absolute;
+  left: 0px;
+  bottom: -450px;
+  height: 60px;
+  left: 50%;
+  margin-left: -25px; /* Half the width */
+}
 #character{
   position: absolute;
   height: 100px;
-  bottom: 0px;
+}
+#popup{
+  position: absolute;
+  bottom: 100px;
+  height: 100px;
+  width: 121px;
+  left: 50%;
+  margin-left: -62px; /* Half the width */
+}
+#tapPopUp{
+  @extend #popup;
 }
 .beer{
   position: absolute;

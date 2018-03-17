@@ -24,6 +24,8 @@ export class GameComponent implements AfterViewInit{
   gameHolder;
   score = 0;
   road: HTMLElement;
+  clover: HTMLElement;
+  cloverPosition: number;
   heart;
   roadStart: number;
   roadEnd: number;
@@ -32,8 +34,16 @@ export class GameComponent implements AfterViewInit{
   isRunning: boolean;
   isPhoneMoving: boolean;
   isReady: boolean;
+  isGameOver: boolean;
+  backgroundSong;
+  gameOverSong;
+  isMute: boolean;
+  showPopUp: boolean;
+  collectedClovers;
+  showTapPopUp: boolean;
   ngAfterViewInit(): void {
     window.ondevicemotion = (event) =>{
+
       this.position = -1 * (event.accelerationIncludingGravity.x);
       if(this.character){
         //set position to character
@@ -50,10 +60,24 @@ export class GameComponent implements AfterViewInit{
     //get game hoolder
     this.gameHolder = document.getElementById('gameHolder');
     this.road = document.getElementById('road');
+    this.clover = document.getElementById('clover');
+    this.clover.style.bottom = '0px';
+
+    console.log(this.clover.style);
 
     this.setRoad();
-    this.generateBeers(6);
-    this.generateCloud(4);
+
+    this.tick = Observable.interval(42).subscribe(x => {
+      if(this.isRunning){
+        this.animateClover();
+        this.checkOnRoad();
+        this.animateHeart();
+        this.animateBeers();
+        this.animateClouds();
+        this.addAutoDrunkMove();
+      }
+      this.test++;
+    });
     // this.startGame();
   }
 
@@ -65,19 +89,26 @@ export class GameComponent implements AfterViewInit{
     //init health
     this.health = 100;
     this.isReady = false;
+    this.isMute = false;
+    this.showPopUp = false;
+    this.cloverPosition = 0;
+    this.collectedClovers = 0;
+    this.showTapPopUp = false;
+
   }
   startGame(){
     this.isRunning = true;
-    this.tick = Observable.interval(42).subscribe(x => {
-      if(this.isRunning){
-        this.checkOnRoad();
-        this.animateHeart();
-        this.animateBeers();
-        this.animateClouds();
-        this.addAutoDrunkMove();
-      }
-      this.test++;
-    });
+    this.isGameOver = false;
+    this.health = 100;
+    this.currentPosition = 100;
+    this.score = 0;
+    this.clearElements();
+    this.generateBeers(6);
+    this.generateCloud(3);
+
+    this.backgroundSong.play();
+
+
   }
   checkIfBeerTouched(beer){
     let charStart = this.currentPosition - 10;
@@ -115,6 +146,8 @@ export class GameComponent implements AfterViewInit{
     this.currentPosition++;
   }
   generateBeers(quantity){
+    this.beers = [];
+
     for(let i = 0; i<quantity; i++){
       let positionX = this.getRandomInt(this.roadStart, this.roadEnd);
       // let positionX = this.roadStart + 100;
@@ -127,6 +160,7 @@ export class GameComponent implements AfterViewInit{
       let beerImg = document.createElement('img');
       beerImg.setAttribute('src', '../assets/beer.gif');
       beerImg.setAttribute('id', id);
+      beerImg.setAttribute('class', 'beer');
       beerImg.style.left = '0px';
       beerImg.style.position = 'absolute';
       beerImg.style.bottom = positionY +'px';
@@ -153,13 +187,26 @@ export class GameComponent implements AfterViewInit{
     this.clouds.forEach(cloud=>{
       cloud.positionX = cloud.positionX + cloud.speed;
       cloud.img.style.left = cloud.positionX + 'px';
-      console.log(cloud.positionX, this.maxWidth +100)
+      console.log(cloud.positionX, this.maxWidth +100);
       if(cloud.positionX >= (this.maxWidth + 100)) {
         this.randomizeCloud(cloud);
       }
     });
   }
+  animateClover(){
+    if(this.collectedClovers <= 0){
+      this.showTapPopUp = true;
+    }else{
+      this.showTapPopUp = false;
+    }
+    this.cloverPosition = this.cloverPosition + 4;
+    if(this.cloverPosition >= (this.maxWidth + 100)){
+      this.cloverPosition = -450;
+    }
+    this.clover.style.bottom = this.cloverPosition + 'px';
+  }
   generateCloud(quantity){
+    this.clouds = [];
     for(let i = 0; i<quantity; i++){
       // let positionX = this.roadStart + 100;
       let positionX = this.getRandomInt(-100, -250);
@@ -178,8 +225,33 @@ export class GameComponent implements AfterViewInit{
       cloudImg.style.bottom = positionY +'px';
       this.clouds.push(new CloudModel(positionY, positionX, speed, id, cloudImg));
       this.gameHolder.appendChild(cloudImg);
+
     }
   }
+  // generateClover(){
+  //   let positionX = this.getRandomInt(this.roadStart, this.roadEnd);
+  //   this.cloverPosition = 0;
+  //   this.clover = document.createElement('img');
+  //   this.clover.setAttribute('src', '../assets/clover.png');
+  //   this.clover.setAttribute('class', 'clover');
+  //
+  //   this.clover.style.left = '0px';
+  //   this.clover.style.position = 'absolute';
+  //   this.clover.style.bottom =  '50px';
+  //   this.clover.style.left = positionX + 'px';
+  //   this.clover.style.height = '60px';
+  //
+  //   this.gameHolder.appendChild(this.clover);
+  //
+  // }
+  clearElements() {
+    let children = this.gameHolder.childNodes;
+    children.forEach((child)=>{
+      if(child.className === 'cloud' || child.className === 'beer'){
+        this.gameHolder.removeChild(child);
+      }
+    });
+    }
   randomizeExistingBeer(beer){
     beer.positionY = this.getRandomInt(-150, -50);
     beer.positionX = this.getRandomInt(this.roadStart, this.roadEnd);
@@ -210,8 +282,15 @@ export class GameComponent implements AfterViewInit{
     this.road.style.width = this.maxWidth * 0.95 + 'px';
 
   }
+  collectClover(){
+    this.collectedClovers++;
+    this.cloverPosition = -450;
+    this.clover.style.bottom = '-450px';
+  }
   checkOnRoad(){
     if(this.health <= 0){
+      this.clearElements();
+      this.collectedClovers = 0;
       if(this.isRunning){
         this.gameOver();
       }
@@ -220,14 +299,27 @@ export class GameComponent implements AfterViewInit{
     }else{
       this.health = this.health - 0.40;
     }
+
+    if(this.score > 1 && this.score <= 2){
+      this.showPopUp = true;
+    }
+    if(this.score > 2){
+      this.showPopUp = false;
+
+    }
   }
   gameOver(){
-    this.isRunning = !this.isRunning;
+    this.backgroundSong.pause();
+    this.gameOverSong.play();
+    // this.backgroundSong = this.gameOverSong;
+    this.isGameOver = true;
+
+    // this.isRunning = !this.isRunning;
     // this.tick.unsubscribe();
-    this.dialog.open(GameOverDialog, {
-      width: 'auto',
-      minWidth: '300px',
-    });
+    // this.dialog.open(GameOverDialog, {
+    //   width: 'auto',
+    //   minWidth: '300px',
+    // });
   }
   animateHeart(){
     if(this.health<= 0){
@@ -268,8 +360,27 @@ export class GameComponent implements AfterViewInit{
     }
   }
   setIsReady(){
+    this.backgroundSong  =<HTMLAudioElement> document.getElementById("backgroundSong");
+    this.gameOverSong  =<HTMLAudioElement> document.getElementById("gameOverSong");
+
+    this.backgroundSong.volume = 0.2;
     this.isReady = true;
-    console.log('here')
+    // console.log('here')
 
   }
+
+
+// Try to mute all video and audio elements on the page
+   mutePage() {
+    this.isMute = !this.isMute;
+    let videos = Array.from(document.querySelectorAll("video"));
+    let audios = Array.from(document.querySelectorAll("audio"));
+     videos.forEach.call(videos, (video) => {
+       video.muted =  this.isMute;
+     });
+     audios.forEach.call(audios, (audio) => {
+       audio.muted =  this.isMute;
+     });
+  }
 }
+
