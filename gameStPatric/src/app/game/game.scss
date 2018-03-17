@@ -9,11 +9,7 @@
   align-items: center;
   .intro{
     height: 430px;
-    h3{
-      color: white;
-      margin: 0;
-      line-height: 1.6;
-    }
+
     img{
       margin: 20px 0;
       height: 140px;
@@ -143,6 +139,11 @@
 }
 #tapPopUp{
   @extend #popup;
+  height: 140px;
+  width: 161px;
+
+  margin-left: -70px; /* Half the width */
+
 }
 .beer{
   position: absolute;

@@ -41,6 +41,7 @@ export class GameComponent implements AfterViewInit{
   showPopUp: boolean;
   collectedClovers;
   showTapPopUp: boolean;
+  isDesktop: boolean;
   ngAfterViewInit(): void {
     window.ondevicemotion = (event) =>{
 
@@ -83,6 +84,12 @@ export class GameComponent implements AfterViewInit{
   }
 
   constructor(public dialog: MatDialog){
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+       console.log('user on mobile');
+       this.isDesktop = false;
+    }else{
+      this.isDesktop = true;
+    }
     //set max width minus character with
     this.maxWidth = window.innerWidth - 80;
     this.maxHeight = window.innerHeight - 80;
@@ -118,7 +125,7 @@ export class GameComponent implements AfterViewInit{
     let maxY = this.maxHeight/2 + 45;
     let minY = this.maxHeight/2 - 20;
     if(beer.positionX >= charStart && beer.positionX  <= charEnd &&
-      beer.positionY >= minY &&  beer.positionY <= maxY){
+      beer.positionY >= minY &&  beer.positionY <= maxY && this.health >0){
       this.score = this.score + 0.10;
       beer.img.style.visibility = 'hidden';
       this.randomizeExistingBeer(beer)

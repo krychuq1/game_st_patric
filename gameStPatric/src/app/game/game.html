@@ -18,9 +18,11 @@
       <h3>It's St. Patrick's Day,</h3>
       <h3>Let's celebrate with some beers!</h3>
       <img src="../../assets/phone_rotate.gif" (load)="setIsReady()">
-      <h3>Turn your phone to the left or right </h3>
-      <h3>drink some beers on the rainbow!</h3>
-      <button (click)="startGame()">play</button>
+      <h3 *ngIf="!isDesktop">Turn your phone to the left or right, </h3>
+      <h3 *ngIf="!isDesktop">drink some beers on the rainbow!</h3>
+      <h3 *ngIf="isDesktop">It seems like you are on desktop device :(</h3>
+      <h3 *ngIf="isDesktop" class="pink">Try it on your MOBILE!</h3>
+      <button (click)="startGame()" *ngIf="!isDesktop">play</button>
     </div>
   </div>
   <img src="../../assets/guy1.png" class="guy guy1">
